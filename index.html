@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Torre Sabina B&B</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <link href="css/style.css" rel='stylesheet' type='text/css' />
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- Fav icon -->
+    <link rel="icon" href="images/favicon.ico">
+
+    <!-- animate.css -->
+    <link rel="stylesheet" href="wow/animate.css" />
+    <!-- gallery -->
+    <link rel="stylesheet" href="gallery/blueimp-gallery.min.css">
+    <link rel="stylesheet" href="star/jquery.rating.css">
+    <script src="js/jquery.min.js"></script>
+
+    <!-- favicon -->
+    <link rel="shortcut icon" type="image/png" href="images/favicon.ico">
+
+    <!---- start-smoth-scrolling---->
+    <script type="text/javascript" src="js/move-top.js"></script>
+    <script type="text/javascript" src="js/easing.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $(".scroll").click(function(event){
+                event.preventDefault();
+                $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+            });
+        });
+        function showhide(id) {
+            var e = document.getElementById(id);
+            var d = document.getElementById('trad');
+            e.style.display = (e.style.display == 'block') ? 'none' : 'block';
+            d.className = (d.className == 'fa fa-plus-circle') ? 'fa fa-minus-circle' : 'fa fa-plus-circle';
+        }
+        function reserv(){
+            $('#arrival_date').val($('#datepicker').val());
+            $('#departure_date').val($('#datepicker1').val());
+            $('#rooms').val($('#room').val());
+            $('#adults').val($('#adult').val());
+        }
+    </script>
+
+    <style type="text/css">
+        div#google_translate_element div.goog-te-gadget-simple{background-color: #FFFFFF; border: transparent;}
+        div#google_translate_element div.goog-te-gadget-simple a.goog-te-menu-value span{color:#555}
+        .goog-te-banner-frame.skiptranslate {display: none !important;}body {top: 0px !important;}
+        #map {width: 100%; height: 500px;}
+    </style>
+
+    <!--start-smoth-scrolling-->
+</head>
+<body>
+
+    <!-- tradutor helder -->
+    <div style="position:fixed; width: auto; height: auto; top:60px; right: 13px; z-index: 1000; background-color: #000000; border-radius: 3px; margin: 5px">
+        <a href="javascript:showhide('google_translate_element')" style="color: #fff; padding: 10px;"><i class="fa fa-language"></i> <i id="trad" style="color: #fff;" class="fa fa-plus-circle"></i></a>
+        <div id="google_translate_element" style="display: none;"></div>
+    </div>
+    <!--start-header-->
+    <div class="header" id="home">
+        <div class="container">
+            <div class="head">
+                <div class="logo">
+                    <a href="index.html"><img src="images/logo.png" style="margin-top: -15px" alt="" /></a>
+                </div>
+                <div class="navigation">
+                     <span class="menu"></span>
+                        <ul class="navig">
+                            <li><a href="#about" class="hvr-bounce-to-bottom scroll">Sobre Nós</a></li>
+                            <li><a href="#servicos" class="hvr-bounce-to-bottom scroll">Serviços</a></li>
+                            <li><a href="#quartos" class="hvr-bounce-to-bottom scroll">Quartos</a></li>
+                            <li><a href="#galeria" class="hvr-bounce-to-bottom scroll">Galeria</a></li>
+                            <li><a href="#satisfacao" class="hvr-bounce-to-bottom scroll">Satisfação</a></li>
+                            <li><a href="#reservas" class="hvr-bounce-to-bottom scroll">Reservas</a></li>
+                            <li><a href="#contactos" class="hvr-bounce-to-bottom scroll">Contactos</a></li>
+                            <!-- <li><a href="javascript:showhide('google_translate_element')">Lang<span class="caret"></span></a><div id="google_translate_element" style="display: none; width: 100%"></div></li> -->
+                        </ul>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <!-- script-for-menu -->
+    <!-- script-for-menu -->
+        <script>
+            $("span.menu").click(function(){
+                $(" ul.navig").slideToggle("slow" , function(){
+                });
+            });
+        </script>
+    <!-- script-for-menu -->
+    <!--start-banner-->
+    <div class="banner">
+        <div class="container">
+            <div class="banner-top">
+                <h1>Booking</h1>
+                <div class="banner-bottom">
+                    <div class="bnr-one">
+                        <div class="bnr-left">
+                            <p>Check In</p>
+                        </div>
+                        <div class="bnr-right">
+                            <input class="date" id="datepicker" type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" required=>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="bnr-one">
+                        <div class="bnr-left">
+                            <p>Check Out</p>
+                        </div>
+                        <div class="bnr-right">
+                            <input class="date" id="datepicker1" type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" required=>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="bnr-one">
+                        <div class="bnr-left">
+                            <p>Adults</p>
+                        </div>
+                        <div class="bnr-right">
+                            <select id="adult">
+                                <option disabled selected value>Select an option</option>
+                                <option  class="rm" value="1">1</option>
+                                <option  class="rm" value="2">2</option>
+                                <option  class="rm" value="3">3</option>
+                                <option  class="rm" value="4">4</option>
+                                <option  class="rm" value="5">5</option>
+                            </select>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="bnr-one">
+                        <div class="bnr-left">
+                            <p>Room</p>
+                        </div>
+                        <div class="bnr-right">
+                            <select id="room">
+                                <option disabled selected value>Select an option</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                                <option>9</option>
+                                <option>10</option>
+                            </select>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="bnr-btn">
+                        <form>
+                            <a href="index.html#reservas" id="booking_reservar" onclick="reserv()">Reservar</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end-banner-->
+    <!---start-date-piker---->
+        <link rel="stylesheet" href="css/jquery-ui.css" />
+        <script src="js/jquery-ui.js"></script>
+            <script>
+                $(function() {
+                    $( "#datepicker,#datepicker1,#arrival_date,#departure_date" ).datepicker({
+                        dateFormat: "dd/mm/yy"
+                    });
+                });
+            </script>
+    <!---/End-date-piker---->
+    <!---728x90--->
+    <!---start-sobre-nos-->
+    <div class="why" id="about">
+        <div class="container">
+            <div class="why-top heading">
+                <h3>Sobre Nós</h3>
+                <p>Torre Sabina B&B</p>
+            </div>
+            <div class="why-bottom">
+                <div class="col-md-4 why-left">
+                    <img src="images/sobre.jpg" class="img-responsive hidden-xs" alt="Torre Sabina B&B" title="Torre Sabina B&B">
+                </div>
+                <div class="col-md-8 why-left">
+                    <p>Uma estadia confortável na torre em três andares.
+                        Hall de entrada no res do chão, sala com varanda no primeiro andar e no topo o quarto. Pequeno-almoço à sombra de coqueiros.
+                        praias em frente da torre também é adequado para não nadadores.
+                        As salas são de azulejos, pisos de pedra natural no terraço e escadas. Tudo é limpo e bem conservado.
+                        Banheiro em torres extras com água quente nos chuveiros.
+                        Alimentos orientada Vitalkost deliciosamente preparados peixe fresco em todas as variações.
+                        O preço inclui o uso de dois Oceankayaks e coletes salva-vidas.
+                        Tarifas especiais para clientes de longo prazo e de invernada na torre.
+                        Na torre é não fumar
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <!--end-sobre-nos-->
+    <!---728x90--->
+    <!--start-servicos-->
+    <div class="how" id="servicos">
+        <div class="container">
+            <div class="how-bottom">
+                <div class="col-md-3 col how-left">
+                    <img src="images/servicos.png" class="img-responsive" alt="" />
+                </div>
+                <div class="col-md-5 col-md-offset-2 how-right">
+                    <div class="how-top heading">
+                        <h3>Serviços</h3>
+                    </div>
+                    <ul>
+                        <li>Internet nas zonas comuns do hotel</li>
+                        <li>Lavandaria</li>
+                        <li>Wireless internet (wi-fi)</li>
+                        <li>Transferes</li>
+                        <li>Serviço de quartos</li>
+                        <li>Serviço de recepção multilingue (Português / Inglês)</li>
+                        <li>Serviço de Pequeno-Almoço</li>
+                        <li>Serviço de transporte de bagagens</li>
+                        <li>Equipamento / Mobiliário</li>
+                        <li>Recepção 24 Horas</li>
+                        <li>Guia turístico</li>
+                    </ul>
+                    <!--<div class="h-btn">
+                        <a href="#">More</a>
+                    </div>-->
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end-servicos-->
+    <!---728x90--->
+    <!--start-quartos-->
+    <div class="news" id="quartos">
+        <div class="container">
+            <div class="news-top heading">
+                <h3>Quartos</h3>
+                <p>A casa de banho privada moderna / WC, lugares de sombra no jardim e uma sala de pequeno-almoço são o ambiente oferecido aos hóspedes a desfrutar das suas férias ao lado da natureza e uma vila encantadora, longe do turismo mainstream</p>
+            </div>
+            <div class="news-bottom gallery">
+                <div class="row">
+                    <div class="col-sm-6 col-md-6">
+                        <div class="thumbnail">
+                            <a href="images/q1.jpg" title="Torre Sabina B&B" class="gallery-image" data-gallery><img src="images/q1.jpg" alt=""></a>
+                            <div class="caption">
+                                <h3>Casal</h3>
+                                <p>Quarto: €50</p>
+                                <p>Bed and Breakfast</p>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-md-6">
+                        <div class="thumbnail">
+                            <a href="images/q2.jpg" title="Torre Sabina B&B" class="gallery-image" data-gallery><img src="images/q2.jpg" alt=""></a>
+                            <div class="caption">
+                                <h3>Casal:</h3>
+                                <p>Quarto: €70 </p>
+                                <p>Meia Pensão</p>
+                            </div>
+                        </div>
+                    </div>
+                 
+                    <div class="clearfix"></div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <!--end-quartos-->
+    <!--start-galeria-->
+    <div class="events" id="galeria">
+        <div class="container">
+            <div class="events-top heading">
+                <h3>Galeria</h3>
+            </div>
+            <div class="events-bottom">
+                <div class="row grid gallery">
+                    <div class="col-sm-4 space wowload fadeInUp">
+                            <a href="images/1.jpg" title="Torre Sabina B&B" class="gallery-image" data-gallery>
+                                    <img src="images/11.jpg" class="img-responsive center-block img-thumbnail" style="background-size: cover">
+                            </a>
+                    </div>
+                    <div class="col-sm-4 space wowload fadeInUp"><a href="images/2.jpg" title="Torre Sabina B&B" class="gallery-image" data-gallery><img src="images/22.jpg" class="img-responsive center-block img-thumbnail" style="background-size: cover"></a></div>
+                    <div class="col-sm-4 space wowload fadeInUp"><a href="images/3.jpg" title="Torre Sabina B&B" class="gallery-image" data-gallery><img src="images/33.jpg" class="img-responsive center-block img-thumbnail" style=" background-size: cover"></a></div>
+                </div>
+                <div class="row grid gallery">
+                    <div class="col-sm-4 space wowload fadeInUp"><a href="images/4.jpg" title="Torre Sabina B&B" class="gallery-image" data-gallery><img src="images/44.jpg" class="img-responsive center-block img-thumbnail" style=" background-size: cover"></a></div>
+                    <div class="col-sm-4 space wowload fadeInUp"><a href="images/5.jpg" title="Torre Sabina B&B" class="gallery-image" data-gallery><img src="images/55.jpg" class="img-responsive center-block img-thumbnail" style=" background-size: cover"></a></div>
+                    <div class="col-sm-4 space wowload fadeInUp"><a href="images/6.jpg" title="Torre Sabina B&B" class="gallery-image" data-gallery><img src="images/66.jpg" class="img-responsive center-block img-thumbnail" style=" background-size: cover"></a></div>
+                </div>
+                <div class="row grid gallery">
+                    <div class="col-sm-4 space wowload fadeInUp"><a href="images/7.jpg" title="Torre Sabina B&B" class="gallery-image" data-gallery><img src="images/77.jpg" class="img-responsive center-block img-thumbnail" style=" background-size: cover"></a></div>
+                    <div class="col-sm-4 space wowload fadeInUp"><a href="images/8.jpg" title="Torre Sabina B&B" class="gallery-image" data-gallery><img src="images/88.jpg" class="img-responsive center-block img-thumbnail" style=" background-size: cover"></a></div>
+                    <div class="col-sm-4 space wowload fadeInUp"><a href="images/9.jpg" title="Torre Sabina B&B" class="gallery-image" data-gallery><img src="images/99.jpg" class="img-responsive center-block img-thumbnail" style="background-size: cover"></a></div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <!--end-galeria-->
+    <!--start-satisfacao-->
+    <div class="news" id="satisfacao">
+        <div class="container">
+            <div class="news-top heading">
+                <h3>Satisfação</h3>
+            </div>
+            <div class="news-bottom">
+                <div class="row">
+                    <form action="process_satisfaction.php" name="satisfacao" method="post" autocomplete="off " style="border: #FFEB00 1px solid; padding: 15px 15px">
+                      <h3>Dados Pessoais</h3>
+                      <hr>
+                      <div class="form-horizontal">
+                        <div class="form-group">
+                            <label for="nome" class="col-sm-2 control-label" style="text-align: left">Nome <span style="color: #CC0000">*</span></label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="nome" placeholder="Nome" required="required">
+                            </div>
+                        </div>
+                      </div>
+                      <div class="form-horizontal">
+                        <div class="form-group">
+                            <label for="num_quarto" class="col-sm-2 control-label" style="text-align: left">Nº Quarto <span style="color: #CC0000">*</span></label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="numero_quartos" placeholder="Numero do Quarto" required="required">
+                            </div>
+                        </div>
+                      </div>
+                      <div class="form-horizontal">
+                        <div class="form-group">
+                            <label for="nacionalidade" class="col-sm-2 control-label" style="text-align: left">Nacionalidade <span style="color: #CC0000">*</span></label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="nacionalidade" placeholder="Nacionalidade" required="required">
+                            </div>
+                        </div>
+                      </div>
+                      <div class="form-horizontal">
+                        <div class="form-group">
+                            <label for="email" class="col-sm-2 control-label" style="text-align: left">Email <span style="color: #CC0000">*</span></label>
+                            <div class="col-sm-8">
+                                <input type="email" class="form-control" name="email" placeholder="Email" required="required">
+                            </div>
+                        </div>
+                      </div>
+
+                      <br>
+
+                      <p class="text-muted"><b>Como conheceu esta unidade?</b></p>
+                      <label class="radio-inline">
+                         <input type="radio" name="conhecimento" value="Amigos_ou_Parentes" required="required"> Por indicação de Amigos e Parentes
+                      </label>
+                      <label class="radio-inline">
+                         <input type="radio" name="conhecimento" value="Publicidade"> Publicidade
+                      </label>
+                      <label class="radio-inline">
+                        <input type="radio" name="conhecimento" value="Motor_de_busca"> Motor de Busca <span style="color: #CC0000">*</span>
+                      </label>
+                      <br>
+                      <br>
+                      <p class="text-muted"><b>Qual foi o motivo da sua estadia?</b></p>
+                      <label class="radio-inline">
+                         <input type="radio" name="motivo" value="Ferias" required="required"> Férias/Lazer
+                      </label>
+                      <label class="radio-inline">
+                         <input type="radio" name="motivo" value="Negocios"> Negócios
+                      </label>
+                      <label class="radio-inline">
+                        <input type="radio" name="motivo" value="Outro"> Outro <span style="color: #CC0000">*</span>
+                      </label>
+                      <br>
+                      <br>
+
+                      <h3>Como avalia os seguintes itens</h3>
+                      <hr>
+                      <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            <div class="form-group">
+                                    <p class="text-muted"><b>Atendimento no momento da Reserva</b></p>
+                                    <input name="Atendimento_no_momento_da_Reserva" type="radio" class="star" value="1" />
+                                    <input name="Atendimento_no_momento_da_Reserva" type="radio" class="star" value="2" />
+                                    <input name="Atendimento_no_momento_da_Reserva" type="radio" class="star" value="3" />
+                                    <input name="Atendimento_no_momento_da_Reserva" type="radio" class="star" value="4" />
+                                    <input name="Atendimento_no_momento_da_Reserva" type="radio" class="star" value="5" />
+                                <br>
+                              </div>
+                              <div class="form-group">
+                                    <p class="text-muted"><b>Atendimento ao Balcão/Recepção</b></p>
+                                    <input name="Atendimento_ao_balcão" type="radio" class="star" value="1" />
+                                    <input name="Atendimento_ao_balcão" type="radio" class="star" value="2" />
+                                    <input name="Atendimento_ao_balcão" type="radio" class="star" value="3" />
+                                    <input name="Atendimento_ao_balcão" type="radio" class="star" value="4" />
+                                    <input name="Atendimento_ao_balcão" type="radio" class="star" value="5" />
+                                <br>
+                              </div>
+                              <div class="form-group">
+                                    <p class="text-muted"><b>Simpatia dos funcionários</b></p>
+                                    <input name="Funcionarios" type="radio" class="star" value="1" />
+                                    <input name="Funcionarios" type="radio" class="star" value="2" />
+                                    <input name="Funcionarios" type="radio" class="star" value="3" />
+                                    <input name="Funcionarios" type="radio" class="star" value="4" />
+                                    <input name="Funcionarios" type="radio" class="star" value="5" />
+                                <br>
+                              </div>
+                              <div class="form-group">
+                                    <p class="text-muted"><b>Serviço de “Check-In”</b></p>
+                                    <input name="Check_In" type="radio" class="star" value="1" />
+                                    <input name="Check_In" type="radio" class="star" value="2" />
+                                    <input name="Check_In" type="radio" class="star" value="3" />
+                                    <input name="Check_In" type="radio" class="star" value="4" />
+                                    <input name="Check_In" type="radio" class="star" value="5" />
+                                <br>
+                              </div>
+                              <div class="form-group">
+                                    <p class="text-muted"><b>Serviço de “Check-Out”</b></p>
+                                    <input name="Check_Out" type="radio" class="star" value="1" />
+                                    <input name="Check_Out" type="radio" class="star" value="2" />
+                                    <input name="Check_Out" type="radio" class="star" value="3" />
+                                    <input name="Check_Out" type="radio" class="star" value="4" />
+                                    <input name="Check_Out" type="radio" class="star" value="5" />
+                                <br>
+                              </div>
+                              <div class="form-group">
+                                    <p class="text-muted"><b>Segurança</b></p>
+                                    <input name="Segurança" type="radio" class="star" value="1" />
+                                    <input name="Segurança" type="radio" class="star" value="2" />
+                                    <input name="Segurança" type="radio" class="star" value="3" />
+                                    <input name="Segurança" type="radio" class="star" value="4" />
+                                    <input name="Segurança" type="radio" class="star" value="5" />
+                                <br>
+                              </div>
+                          </div>
+                          <div class="col-lg-6 col-md-6">
+                            <div class="form-group">
+                                    <p class="text-muted"><b>Comforto e Limpeza dos Quartos</b></p>
+                                    <input name="Comforto_e_Limpeza_dos_Quartos" type="radio" class="star" value="1" />
+                                    <input name="Comforto_e_Limpeza_dos_Quartos" type="radio" class="star" value="2" />
+                                    <input name="Comforto_e_Limpeza_dos_Quartos" type="radio" class="star" value="3" />
+                                    <input name="Comforto_e_Limpeza_dos_Quartos" type="radio" class="star" value="4" />
+                                    <input name="Comforto_e_Limpeza_dos_Quartos" type="radio" class="star" value="5" />
+                                <br>
+                              </div>
+                              <div class="form-group">
+                                    <p class="text-muted"><b>Serviço de Pequeno-Almoço</b></p>
+                                    <input name="Pequeno_Almoço" type="radio" class="star" value="1" />
+                                    <input name="Pequeno_Almoço" type="radio" class="star" value="2" />
+                                    <input name="Pequeno_Almoço" type="radio" class="star" value="3" />
+                                    <input name="Pequeno_Almoço" type="radio" class="star" value="4" />
+                                    <input name="Pequeno_Almoço" type="radio" class="star" value="5" />
+                                <br>
+                              </div>
+                              <div class="form-group">
+                                    <p class="text-muted"><b>Envolvente externo ao empreendimento</b></p>
+                                    <input name="Envolvente_externo_ao_empreendimento" type="radio" class="star" value="1" />
+                                    <input name="Envolvente_externo_ao_empreendimento" type="radio" class="star" value="2" />
+                                    <input name="Envolvente_externo_ao_empreendimento" type="radio" class="star" value="3" />
+                                    <input name="Envolvente_externo_ao_empreendimento" type="radio" class="star" value="4" />
+                                    <input name="Envolvente_externo_ao_empreendimento" type="radio" class="star" value="5" />
+                                <br>
+                              </div>
+                              <div class="form-group">
+                                    <p class="text-muted"><b>Serviço de Internet</b></p>
+                                    <input name="Internet" type="radio" class="star" value="1" />
+                                    <input name="Internet" type="radio" class="star" value="2" />
+                                    <input name="Internet" type="radio" class="star" value="3" />
+                                    <input name="Internet" type="radio" class="star" value="4" />
+                                    <input name="Internet" type="radio" class="star" value="5" />
+                                <br>
+                              </div>
+                              <div class="form-group">
+                                    <p class="text-muted"><b>Acessibilidade ao empreendimento</b></p>
+                                    <input name="Acessibilidade_ao_empreendimento" type="radio" class="star" value="1" />
+                                    <input name="Acessibilidade_ao_empreendimento" type="radio" class="star" value="2" />
+                                    <input name="Acessibilidade_ao_empreendimento" type="radio" class="star" value="3" />
+                                    <input name="Acessibilidade_ao_empreendimento" type="radio" class="star" value="4" />
+                                    <input name="Acessibilidade_ao_empreendimento" type="radio" class="star" value="5" />
+                                <br>
+                              </div>
+                              <div class="form-group">
+                                    <p class="text-muted"><b>Acessibilidade à Ilha</b></p>
+                                    <input name="Acessibilidade_a_Ilha" type="radio" class="star" value="1" />
+                                    <input name="Acessibilidade_a_Ilha" type="radio" class="star" value="2" />
+                                    <input name="Acessibilidade_a_Ilha" type="radio" class="star" value="3" />
+                                    <input name="Acessibilidade_a_Ilha" type="radio" class="star" value="4" />
+                                    <input name="Acessibilidade_a_Ilha" type="radio" class="star" value="5" />
+                                <br>
+                              </div>
+                          </div>
+                      </div>
+                      <hr>
+                      <h3>De modo geral, como classifica a sua estadia no empreendimento?</h3>
+                      <div class="form-group">
+                            <input name="Classificacao_Geral_Hotel" type="radio" class="star" value="1" />
+                            <input name="Classificacao_Geral_Hotel" type="radio" class="star" value="2" />
+                            <input name="Classificacao_Geral_Hotel" type="radio" class="star" value="3" />
+                            <input name="Classificacao_Geral_Hotel" type="radio" class="star" value="4" />
+                            <input name="Classificacao_Geral_Hotel" type="radio" class="star" value="5" />
+                        <br>
+                      </div>
+                      <hr>
+                      <div class="form-group">
+                        <label for="comentarios">Comentários</label>
+                        <div>
+                            <textarea class="form-control" name="mensagem" rows="4" placeholder="Comentários..."></textarea>
+                        </div>
+                      </div>
+                      <br>
+
+                      <button type="submit" name="submit" class="btn btn-primary">Enviar</button>
+                      <br>
+                    </form>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <!--end-satisfacao-->
+    <!--start-reservas-->
+    <div class="events" id="reservas">
+        <div class="container">
+            <div class="events-top heading">
+                <h3>Reservas</h3>
+            </div>
+            <div class="events-bottom">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form class="form-horizontal" action="process_reservation.php" name="reserva" method="post" autocomplete="off" role="form" style="border: #FFEB00 1px solid; padding: 15px 15px">
+                          <div class="form-group">
+                            <label for="data_chegada" class="col-sm-2 control-label" style="text-align: left">Data Chegada <span style="color: #CC0000">*</span></label>
+                            <div class="col-sm-3">
+                              <input type="text" class="form-control" id="arrival_date" name="arrival_date" placeholder="Data Chegada" required="required">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="data_partida" class="col-sm-2 control-label" style="text-align: left">Data Partida <span style="color: #CC0000">*</span></label>
+                            <div class="col-sm-3">
+                              <input type="text" class="form-control" id="departure_date" name="departure_date" placeholder="Data Partida" required="required">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="quartos" class="col-sm-2 control-label" style="text-align: left">Quartos <span style="color: #CC0000">*</span></label>
+                            <div class="col-sm-3">
+                                <select class="form-control" id="rooms" name="rooms" required="required">
+                                    <option disabled selected value> Selecione uma opção </option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                                </select>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="adultos" class="col-sm-2 control-label" style="text-align: left">Adultos <span style="color: #CC0000">*</span></label>
+                            <div class="col-sm-3">
+                                <select class="form-control" id="adults" name="adults" required="required">
+                                    <option disabled selected value> Selecione uma opção </option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                                </select>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="nome" class="col-sm-2 control-label" style="text-align: left">Nome <span style="color: #CC0000">*</span></label>
+                            <div class="col-sm-5">
+                              <input type="text" class="form-control" id="name" name="name" placeholder="" required="required">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="apelido" class="col-sm-2 control-label" style="text-align: left">Apelido <span style="color: #CC0000">*</span></label>
+                            <div class="col-sm-5">
+                              <input type="text" class="form-control" id="surname" name="surname" placeholder="" required="required">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="email" class="col-sm-2 control-label" style="text-align: left">Email <span style="color: #CC0000">*</span></label>
+                            <div class="col-sm-5">
+                              <input type="email" class="form-control" id="email" name="email" placeholder="" required="required">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="num_doc" class="col-sm-2 control-label" style="text-align: left">Nº de documento <span style="color: #CC0000">*</span></label>
+                            <div class="col-sm-5">
+                              <input type="text" class="form-control" id="num_doc" name="num_doc" placeholder="" required="required">
+                              <p class="help-block">Pode indicar o nº de BI ou de Passaporte</p>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="telefone" class="col-sm-2 control-label" style="text-align: left">Telefone <span style="color: #CC0000">*</span></label>
+                            <div class="col-sm-5">
+                              <input type="tel" class="form-control" id="telefone" name="telefone" placeholder="" required="required">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="endereco" class="col-sm-2 control-label" style="text-align: left">Endereço <span style="color: #CC0000">*</span></label>
+                            <div class="col-sm-5">
+                              <input type="text" class="form-control" id="address" name="address" placeholder="" required="required">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="pais_origem" class="col-sm-2 control-label" style="text-align: left">País de Origem</label>
+                            <div class="col-sm-5">
+                              <input type="text" class="form-control" id="origin_country" name="origin_country" placeholder="">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="nacionalidade" class="col-sm-2 control-label" style="text-align: left">Nacionalidade</label>
+                            <div class="col-sm-5">
+                              <input type="text" class="form-control" id="nationality" name="nationality" placeholder="">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="mot_viagem" class="col-sm-2 control-label" style="text-align: left">Motivo da Viagem</label>
+                            <div class="col-sm-5">
+                              <input type="text" class="form-control" id="travel_motive" name="travel_motive" placeholder="">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="info" class="col-sm-2 control-label" style="text-align: left">Informações adicionais</label>
+                            <div class="col-sm-5">
+                                <textarea class="form-control" id="info" name="info" rows="4" placeholder=""></textarea>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="num_cama_ext" class="col-sm-2 control-label" style="text-align: left">Nº de camas extra</label>
+                            <div class="col-sm-5">
+                              <input type="number" class="form-control" id="number_extra_bed" name="number_extra_bed" placeholder="">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                              <p style="color: #CC0000">*Campos de preenchimento obrigatório.</p>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                              <button type="submit" name="submit" class="btn btn-primary">Reservar</button>
+                            </div>
+                          </div>
+                        </form>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+
+    <!--end-reservas-->
+    <!--start-footer-->
+    <div class="footer">
+        <div class="container">
+        <div class="touch-top heading" id="contactos">
+                <h3>CONTACTE-NOS</h3>
+            </div>
+            <div class="touch-bottom">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h4>Fale connosco</h4>
+                        <form role="form" action="process_contact.php" id="contacto" method="post">
+                            <div class="form-group">
+                                <input type="text" class="form-control" required name="nome" id="name" placeholder="Nome">
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" required name="email" id="email" placeholder="Email">
+                            </div>
+                            <div class="form-group">
+                                <input type="phone" class="form-control" required name="telefone" id="phone" placeholder="Telefone">
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" required name="mensagem" placeholder="Mensagem" rows="4"></textarea>
+                            </div>
+                            <div class="center-block">
+                                <button type="submit" class="btn btn-primary">Enviar</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-sm-6">
+                        <h4>Endereço</h4>
+                        <p>Calheta, ilha do Maio - Cabo Verde</p>
+                        <address>
+                            <strong>Torre Sabina B&B</strong><br>
+                            <abbr title="Phone">Telefone:</abbr>+238 256 12 99<br>
+                            <!-- <abbr title="Fax">Fax:</abbr>+238 332 39 39<br> -->
+                        </address>
+                        <address>
+                            <p><img class="img-responsive center-block" src="images/Maiologo.png" style="max-height: 60px;"></p><br>
+                            <strong>Email</strong><br>
+                            <a href="mailto:#">maiokapverde@gmail.com</a>
+                        </address>
+                        <ul>
+                            <li><a href="https://www.facebook.com/Residencialjennymindelo"><span class="fb"> </span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12" style="margin-top: 20px">
+                        <div id ="map" class="img-responsive">
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="footer-top">
+                <p class="footer-class">© eTourism Project by <b>Prime Consulting</b> &middot; Termos &middot; Privacidade </p>
+            </div>
+        </div>
+        <script type="text/javascript">
+                                    $(document).ready(function() {
+                                        /*
+                                        var defaults = {
+                                            containerID: 'toTop', // fading element id
+                                            containerHoverID: 'toTopHover', // fading element hover id
+                                            scrollSpeed: 1200,
+                                            easingType: 'linear' 
+                                        };
+                                        */
+                                        
+                                        $().UItoTop({ easingType: 'easeOutQuart' });
+                                        
+                                    });
+                                </script>
+        <a href="#home" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+    </div>
+    <!--end-footer-->
+
+    <!-- Google Translate -->
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <script type="text/javascript"> 
+
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'pt',
+                includedLanguages: 'ca,da,de,el,en,es,fr,it,ja,ko,nl,pl,pt,ru,sv,tl',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+        function initMap() {
+            var myLatLng = {lat: 15.232862, lng: -23.209371};
+            var mapDiv = document.getElementById('map');
+            var map = new google.maps.Map(mapDiv, {
+                center: myLatLng,
+                zoom: 17
+            });
+            var iconBase = 'https://maps.google.com/mapfiles/ms/micons/';
+            var marker = new google.maps.Marker({
+                position: myLatLng,
+                map: map,
+                icon: iconBase + 'lodging.png'
+            });
+            var marker = new google.maps.Marker({
+                position: myLatLng,
+                map: map,
+                title: 'Torre Sabina B&B'
+            });
+            var infowindow = new google.maps.InfoWindow({
+                content: 'Torre Sabina B&B'
+            });
+            infowindow.open(map,marker);
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?callback=initMap&key=AIzaSyA9jLsorbF1d-5bQIo2cVHC8NmJmHL1FF4&key=AIzaSyA9jLsorbF1d-5bQIo2cVHC8NmJmHL1FF4" async defer></script>
+
+    <!-- gallery -->
+    <script src="gallery/jquery.blueimp-gallery.min.js"></script>
+
+    <!-- The Bootstrap Image Gallery lightbox, should be a child element of the document body -->
+    <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
+    <!-- The container for the modal slides -->
+    <div class="slides"></div>
+    <!-- Controls for the borderless lightbox -->
+    <h3 class="title">title</h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <!-- The modal dialog, which will be used to wrap the lightbox content -->
+    </div>
+
+    <!-- wow script -->
+    <script src="wow/wow.min.js"></script>
+
+    <!-- Star JQuery -->
+    <script src='star/jquery.MetaData.js' type="text/javascript"></script>
+    <script src='star/jquery.rating.js' type="text/javascript"></script>
+
+</body>
+
+</html>
