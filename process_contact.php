@@ -50,8 +50,9 @@ if (!$errors && !$missing) {
 
         // initialize the message
         $message = Swift_Message::newInstance()
-            ->setSubject('#subject#')
-            ->setFrom($from);
+           ->setSubject('#subject#')
+           ->setReplyTo(array($email,$username))
+           ->setFrom($email);
 
             //embed image in email
 
