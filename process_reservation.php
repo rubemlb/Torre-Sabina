@@ -173,10 +173,10 @@ EOT;
         echo $e->getMessage();
     }
 }}else{
-            echo "<script type='text/javascript'>
-                       alert('A sua reserva não pôde ser feita!');
-                       location='index.html';
-                  </script>";
-        }
+    echo "<script type='text/javascript'>
+               alert('A sua reserva não pôde ser feita!');
+               location='index.html';
+          </script>";
     }
-?>
+    }
+?>  
